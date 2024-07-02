@@ -1,0 +1,12 @@
+import { createBrowserRouter } from "react-router-dom";
+import App from "../App";
+
+const router = createBrowserRouter([
+  {
+    path: "/home",
+    element: <App />,
+    children: [{}],
+  },
+]);
+
+export default router;
