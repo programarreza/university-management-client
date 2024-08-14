@@ -1,14 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Col, Flex } from "antd";
 import { FieldValues, SubmitHandler } from "react-hook-form";
+import { toast } from "sonner";
 import PHForm from "../../../components/form/PHForm";
 import PHSelect from "../../../components/form/PHSelect";
 import { monthOptions } from "../../../constants/global";
 import { nameOptions } from "../../../constants/semester";
-import { academicSemesterSchema } from "../../../schemas/academicManagement.schema";
 import { useAddAcademicSemesterMutation } from "../../../redux/features/admin/academicManagement.api";
-import { toast } from "sonner";
-import { TResponse } from "../../../types/global";
+import { academicSemesterSchema } from "../../../schemas/academicManagement.schema";
 
 const CreateAcademicSemester = () => {
   const [addAcademicSemester] = useAddAcademicSemesterMutation();
@@ -26,8 +25,8 @@ const CreateAcademicSemester = () => {
     };
 
     try {
-      const res = (await addAcademicSemester(semesterData)) as TResponse;
-      console.log(res);
+      const res = await addAcademicSemester(semesterData).unwrap();
+
       if (res.error) {
         toast.error(res.error.data.message, { id: toastId });
       } else {

@@ -1,7 +1,11 @@
 import { Button, Table, TableColumnsType, TableProps } from "antd";
 import { useGetAcademicFacultiesQuery } from "../../../redux/features/admin/academicManagement.api";
 import { TQueryParam } from "../../../types";
-import { TTableData } from "./AcademicSemester";
+
+type TTableData = {
+  key: string;
+  name: string;
+};
 
 const AcademicFaculty = () => {
   const { data: facultyData, isFetching } =
