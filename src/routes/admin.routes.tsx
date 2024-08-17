@@ -80,12 +80,6 @@ export const adminPaths = [
         path: "create-faculty",
         element: <CreateFaculty />,
       },
-
-      {
-        name: "Create Member",
-        path: "create-member",
-        element: <CreateStudent />,
-      },
     ],
   },
 ];

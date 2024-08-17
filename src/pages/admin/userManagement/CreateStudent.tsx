@@ -11,45 +11,6 @@ import {
 } from "../../../redux/features/admin/academicManagement.api";
 import { useAddStudentMutation } from "../../../redux/features/admin/userManagement.api";
 
-const studentDummyData = {
-  password: "student123",
-  student: {
-    name: {
-      firstName: "Fayjul",
-      middleName: "Islam",
-      lastName: "rayhan",
-    },
-    gender: "male",
-    dateOfBirth: "2000-05-15",
-    bloodGroup: "O+",
-
-    email: "fayjul@gmail.com",
-    contactNo: "03",
-    emergencyContactNo: "+0987654321",
-    presentAddress: "123 Main St, Springfield, IL, 62701",
-    permanentAddress: "456 Elm St, Springfield, IL, 62702",
-
-    guardian: {
-      fatherName: "James Doe",
-      fatherOccupation: "Engineer",
-      fatherContactNo: "+1122334455",
-      motherName: "Jane Doe",
-      motherOccupation: "Teacher",
-      motherContactNo: "+2233445566",
-    },
-
-    localGuardian: {
-      name: "Samuel Green",
-      occupation: "Doctor",
-      contactNo: "+3344556677",
-      address: "789 Maple St, Springfield, IL, 62703",
-    },
-
-    // admissionSemester: "6659b78c7e177efe5fd49f5f",
-    // academicDepartment: "665ae696cd76a5e55314bfbf",
-  },
-};
-
 //! This is only for development
 //! Should be removed
 const studentDefaultValues = {
@@ -89,9 +50,8 @@ const studentDefaultValues = {
 };
 
 const CreateStudent = () => {
-  const [addStudent, { data, error }] = useAddStudentMutation();
+  const [addStudent] = useAddStudentMutation();
 
-  console.log({ data, error });
 
   const { data: sData, isLoading: sIsLoading } =
     useGetAllSemestersQuery(undefined);
@@ -108,7 +68,6 @@ const CreateStudent = () => {
     label: item.name,
   }));
 
-  console.log(sData);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
     const studentData = {

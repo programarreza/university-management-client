@@ -1,29 +1,21 @@
 import { Button, Pagination, Space, Table, TableColumnsType } from "antd";
-import { useGetAllStudentsQuery } from "../../../redux/features/admin/userManagement.api";
-import { TQueryParam, TStudent } from "../../../types";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useGetAllStudentsQuery } from "../../../redux/features/admin/userManagement.api";
+import { TStudent } from "../../../types";
 
 export type TTableData = Pick<TStudent, "fullName" | "id">;
 
 const StudentData = () => {
-  const [params, setParams] = useState<TQueryParam[]>([]);
   const [page, setPage] = useState(1);
 
-  const {
-    data: studentData,
-    isLoading,
-    isFetching,
-  } = useGetAllStudentsQuery([
+  const { data: studentData, isFetching } = useGetAllStudentsQuery([
     { name: "limit", value: 3 },
     { name: "page", value: page },
     { name: "sort", value: "id" },
-    ...params,
   ]);
 
   const metaData = studentData?.meta;
-  console.log(metaData);
-
   const tableData = studentData?.data?.map(
     ({ _id, id, fullName, email, contactNo }) => ({
       key: _id,
@@ -59,7 +51,6 @@ const StudentData = () => {
       title: "Action",
       key: "x",
       render: (item) => {
-        console.log(item);
         return (
           <Space>
             <Link to={`/admin/student-data/${item?.key}`}>
@@ -74,33 +65,12 @@ const StudentData = () => {
     },
   ];
 
-  //   const onChange: TableProps<TTableData>["onChange"] = (
-  //     _pagination,
-  //     filters,
-  //     _sorter,
-  //     extra
-  //   ) => {
-  //     if (extra.action === "filter") {
-  //       const queryParams: TQueryParam[] = [];
-
-  //       filters.name?.forEach((item) =>
-  //         queryParams.push({ name: "name", value: item })
-  //       );
-
-  //       filters.year?.forEach((item) =>
-  //         queryParams.push({ name: "year", value: item })
-  //       );
-  //       setParams(queryParams);
-  //     }
-  //   };
-
   return (
     <>
       <Table
         loading={isFetching}
         columns={columns}
         dataSource={tableData}
-        //   onChange={onChange}
         pagination={false}
         showSorterTooltip={{ target: "sorter-icon" }}
       />
