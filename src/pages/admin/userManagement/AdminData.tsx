@@ -1,21 +1,20 @@
 import { Button, Pagination, Space, Table, TableColumnsType } from "antd";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useGetAllStudentsQuery } from "../../../redux/features/admin/userManagement.api";
+import { useGetAllAdminsQuery } from "../../../redux/features/admin/userManagement.api";
 import { TStudent } from "../../../types";
 
 export type TTableData = Pick<TStudent, "fullName" | "id">;
 
-const StudentData = () => {
+const AdminData = () => {
   const [page, setPage] = useState(1);
 
-  const { data: studentData, isFetching } = useGetAllStudentsQuery([
+  const { data: adminData, isFetching } = useGetAllAdminsQuery([
     { name: "page", value: page },
     { name: "sort", value: "id" },
   ]);
 
-  const metaData = studentData?.meta;
-  const tableData = studentData?.data?.map(
+  const metaData = adminData?.meta;
+  const tableData = adminData?.data?.map(
     ({ _id, id, fullName, email, contactNo }) => ({
       key: _id,
       id,
@@ -32,7 +31,7 @@ const StudentData = () => {
       dataIndex: "fullName",
     },
     {
-      title: "Role No.",
+      title: "Id No.",
       key: "id",
       dataIndex: "id",
     },
@@ -49,14 +48,11 @@ const StudentData = () => {
     {
       title: "Action",
       key: "x",
-      render: (item) => {
+      render: () => {
         return (
           <Space>
-            <Link to={`/admin/student-data/${item?.key}`}>
-              <Button>Details</Button>
-            </Link>
             <Button>Update</Button>
-            <Button>Block</Button>
+            <Button>Delete</Button>
           </Space>
         );
       },
@@ -83,4 +79,4 @@ const StudentData = () => {
   );
 };
 
-export default StudentData;
+export default AdminData;

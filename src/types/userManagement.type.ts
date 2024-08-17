@@ -29,6 +29,25 @@ export interface TStudent {
   updatedAt: string;
 }
 
+export type TAdmin = {
+  _id: string;
+  id: string;
+  user: TUser;
+  designation: string;
+  name: TName;
+  gender: string;
+  dateOfBirth: string;
+  email: string;
+  contactNo: string;
+  emergencyContactNo: string;
+  bloodGroup: string;
+  presentAddress: string;
+  permanentAddress: string;
+  profileImg: string;
+  isDeleted: boolean;
+  fullName: string;
+};
+
 export type TUser = {
   _id: string;
   id: string;
@@ -66,32 +85,3 @@ export type TLocalGuardian = {
   address: string;
   _id: string;
 };
-
-//   export interface AdmissionSemester {
-// 	_id: string
-// 	name: string
-// 	year: string
-// 	code: string
-// 	startMonth: string
-// 	endMonth: string
-// 	createdAt: string
-// 	updatedAt: string
-// 	__v: number
-//   }
-
-//   export interface AcademicDepartment {
-// 	_id: string
-// 	name: string
-// 	academicFaculty: AcademicFaculty
-// 	createdAt: string
-// 	updatedAt: string
-// 	__v: number
-//   }
-
-//   export interface AcademicFaculty {
-// 	_id: string
-// 	name: string
-// 	createdAt: string
-// 	updatedAt: string
-// 	__v: number
-//   }

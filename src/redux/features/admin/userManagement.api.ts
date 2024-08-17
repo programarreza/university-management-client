@@ -1,4 +1,4 @@
-import { TQueryParam, TResponseRedux, TStudent } from "../../../types";
+import { TAdmin, TQueryParam, TResponseRedux, TStudent } from "../../../types";
 import { baseApi } from "../../api/baseApi";
 
 const userManagementApi = baseApi.injectEndpoints({
@@ -42,6 +42,31 @@ const userManagementApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+
+    getAllAdmins: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
+
+        if (args) {
+          args.forEach((item: TQueryParam) => {
+            params.append(item.name, item.value as string);
+          });
+        }
+
+        return {
+          url: "/admins",
+          method: "GET",
+          params: params,
+        };
+      },
+
+      transformResponse: (response: TResponseRedux<TAdmin[]>) => {
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
+    }),
   }),
 });
 
@@ -49,4 +74,5 @@ export const {
   useAddStudentMutation,
   useGetAllStudentsQuery,
   useAddAdminMutation,
+  useGetAllAdminsQuery,
 } = userManagementApi;
