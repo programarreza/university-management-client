@@ -1,20 +1,20 @@
 import { Button, Pagination, Space, Table, TableColumnsType } from "antd";
 import { useState } from "react";
-import { useGetAllAdminsQuery } from "../../../redux/features/admin/userManagement.api";
-import { TAdmin } from "../../../types";
+import { useGetAllFacultiesQuery } from "../../../redux/features/admin/userManagement.api";
+import { TFaculty } from "../../../types";
 
-export type TTableData = Pick<TAdmin, "fullName" | "id">;
+export type TTableData = Pick<TFaculty, "fullName" | "id">;
 
-const AdminData = () => {
+const FacultiesData = () => {
   const [page, setPage] = useState(1);
 
-  const { data: adminData, isFetching } = useGetAllAdminsQuery([
+  const { data: facultyData, isFetching } = useGetAllFacultiesQuery([
     { name: "page", value: page },
     { name: "sort", value: "id" },
   ]);
 
-  const metaData = adminData?.meta;
-  const tableData = adminData?.data?.map(
+  const metaData = facultyData?.meta;
+  const tableData = facultyData?.data?.map(
     ({ _id, id, fullName, email, contactNo }) => ({
       key: _id,
       id,
@@ -79,4 +79,4 @@ const AdminData = () => {
   );
 };
 
-export default AdminData;
+export default FacultiesData;
