@@ -18,7 +18,7 @@ const PHInput = ({ type, name, label }: TInputProps) => {
               {...field}
               type={type}
               id={name}
-              placeholder={name}
+              placeholder={label}
               size="large"
             />
           </Form.Item>
