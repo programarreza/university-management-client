@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import PHForm from "../../../components/form/PHForm";
 import PHSelect from "../../../components/form/PHSelect";
 import { monthOptions } from "../../../constants/global";
-import { nameOptions } from "../../../constants/semester";
+import { semesterOptions } from "../../../constants/semester";
 import { useAddAcademicSemesterMutation } from "../../../redux/features/admin/academicManagement.api";
 import { academicSemesterSchema } from "../../../schemas/academicManagement.schema";
 
@@ -14,7 +14,7 @@ const CreateAcademicSemester = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Creating....");
-    const name = nameOptions[Number(data?.name) - 1]?.label;
+    const name = semesterOptions[Number(data?.name) - 1]?.label;
 
     const semesterData = {
       name,
@@ -50,7 +50,7 @@ const CreateAcademicSemester = () => {
           onSubmit={onSubmit}
           resolver={zodResolver(academicSemesterSchema)}
         >
-          <PHSelect label="Name" name="name" options={nameOptions} />
+          <PHSelect label="Name" name="name" options={semesterOptions} />
           <PHSelect label="Year" name="year" options={yearOptions} />
           <PHSelect
             label="Start Month"
