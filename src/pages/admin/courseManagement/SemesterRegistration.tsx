@@ -46,12 +46,6 @@ const SemesterRegistration = () => {
     }
   };
 
-  // const currentYear = new Date().getFullYear();
-  // const yearOptions = [0, 1, 2, 3, 4].map((number) => ({
-  //   value: String(currentYear + number),
-  //   label: String(currentYear + number),
-  // }));
-
   return (
     <Flex justify="center" align="center">
       <Col span={6}>
