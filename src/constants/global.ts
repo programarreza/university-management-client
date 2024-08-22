@@ -17,6 +17,16 @@ export const genders = ["Male", "Female", "Other"];
 
 export const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
+export const dayOptions = [
+  { value: "Sun", label: "Sunday" },
+  { value: "Mon", label: "Monday" },
+  { value: "Tue", label: "Tuesday" },
+  { value: "Wed", label: "Wednesday" },
+  { value: "Thu", label: "Thursday" },
+  { value: "Fri", label: "Friday" },
+  { value: "Sat", label: "Saturday" },
+];
+
 export const monthOptions = monthNames.map((item) => ({
   value: item,
   label: item,
