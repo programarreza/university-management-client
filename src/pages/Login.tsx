@@ -13,22 +13,14 @@ const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  // const { register, handleSubmit } = useForm({
-  //   defaultValues: {
-  //     id: "A-0001",
-  //     password: "admin123",
-  //   },
-  // });
-
   const defaultValues = {
-    userId: "A-0001",
-    password: "admin123",
+    userId: "2030010001",
+    password: "123456",
   };
 
   const [login] = useLoginMutation();
 
   const onSubmit = async (data: FieldValues) => {
-    console.log(data);
     const toastId = toast.loading("Logging in");
 
     try {
@@ -43,9 +35,16 @@ const Login = () => {
       dispatch(setUser({ user: user, token: res.data.accessToken }));
       toast.success("Logged in", { id: toastId, duration: 1000 });
 
-      navigate(`/${user.role}/dashboard`);
-    } catch (error) {
-      toast.error("Something went wrong", { id: toastId, duration: 1000 });
+      if (res.data.needsPasswordChange) {
+        navigate("/change-password");
+      } else {
+        navigate(`/${user.role}/dashboard`);
+      }
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Something went wrong", {
+        id: toastId,
+        duration: 1000,
+      });
     }
   };
 
